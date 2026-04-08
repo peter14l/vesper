@@ -30,14 +30,19 @@ jobs:
         with:
           targets: aarch64-linux-android, armv7-linux-androideabi, i686-linux-android, x86_64-linux-android
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libclang-dev cmake
+
       - name: Install cargo-ndk
         run: cargo install cargo-ndk
 
       - name: Install flutter_rust_bridge_codegen
-        run: cargo install flutter_rust_bridge_codegen
+        run: cargo install flutter_rust_bridge_codegen --version 2.11.1
 
       - name: Run flutter_rust_bridge_codegen
-        run: flutter_rust_bridge_codegen generate --rust-root vesper_core --dart-root vesper_flutter --rust-input vesper_core/src/api.rs
+        run: flutter_rust_bridge_codegen generate
 
       - name: Build Rust Core for Android
         working-directory: vesper_core

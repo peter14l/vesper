@@ -1,0 +1,7 @@
+# flutter_rust_bridge configuration
+# See https://fzyzcjy.github.io/flutter_rust_bridge/v2/index.html for details
+
+rust_input: ["crate::api"]
+rust_root: "vesper_core"
+dart_output: "vesper_flutter/lib/src/rust"
+dart_root: "vesper_flutter"
