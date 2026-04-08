@@ -1,0 +1,44 @@
+name: Windows Release Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install flutter_rust_bridge_codegen
+        run: cargo install flutter_rust_bridge_codegen --version 2.0.0
+
+      - name: Install Flutter Dependencies
+        working-directory: vesper_flutter
+        run: flutter pub get
+
+      - name: Build Windows App
+        working-directory: vesper_flutter
+        run: flutter build windows --release
+
+      - name: Create MSIX
+        working-directory: vesper_flutter
+        run: flutter pub run msix:create
+
+      - name: Upload MSIX
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-release-msix
+          path: vesper_flutter/build/windows/runner/Release/Vesper.msix
