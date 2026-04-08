@@ -46,20 +46,18 @@ class SettingsScreen extends StatelessWidget {
           ),
           _SectionHeader(title: 'SUPPORT'),
           ListTile(
-            leading: Icon(PhosphorIcons.coffee(), color: Colors.orange),
+            leading: const Icon(PhosphorIcons.coffee, color: Colors.orange),
             title: const Text('Buy me a coffee'),
             subtitle: const Text('Support Vesper development'),
             trailing: const Icon(Icons.open_in_new),
-            onTap: () {
-              // Open Ko-Fi link
-            },
+            onTap: () => launchUrl(Uri.parse(VesperConstants.kKofiUrl)),
           ),
           ListTile(
-            leading: Icon(PhosphorIcons.githubLogo()),
+            leading: const Icon(PhosphorIcons.githubLogo),
             title: const Text('GitHub Repository'),
             subtitle: const Text('Vesper is open source'),
             trailing: const Icon(Icons.open_in_new),
-            onTap: () {},
+            onTap: () => launchUrl(Uri.parse(VesperConstants.kGithubRepoUrl)),
           ),
           const SizedBox(height: 32),
           Center(
