@@ -26,7 +26,7 @@ jobs:
         run: cargo install flutter_rust_bridge_codegen
 
       - name: Run flutter_rust_bridge_codegen
-        run: flutter_rust_bridge_codegen generate --rust-root vesper_core --dart-root vesper_flutter
+        run: flutter_rust_bridge_codegen generate --rust-root vesper_core --dart-root vesper_flutter --rust-input vesper_core/src/api.rs
 
       - name: Install Flutter Dependencies
         working-directory: vesper_flutter
